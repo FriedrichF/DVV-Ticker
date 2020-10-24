@@ -1,5 +1,7 @@
 ## Readme
 
+Wraps DVV-Ticker (dvv.sams-ticker.de) data to a view, which can be used as streaming overlay. 
+
 ### Requirements
 
 - python 3.x
