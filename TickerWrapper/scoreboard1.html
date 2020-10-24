@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>WebSocket Test</title>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+	<link rel="stylesheet" href="scoreboard.css">
+</head>
+<body>
+<script>
+
+  var wsUri = "ws://192.168.1.36:8765";
+
+  function init() {
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) {
+      onOpen(evt)
+    };
+    websocket.onclose = function(evt) {
+      onClose(evt)
+    };
+    websocket.onmessage = function(evt) {
+      onMessage(evt)
+    };
+    websocket.onerror = function(evt) {
+      onError(evt)
+    };
+  }
+
+  function onOpen(evt) {
+    console.log("CONNECTED");
+  }
+
+  function onClose(evt) {
+    console.log("DISCONNECTED");
+  }
+
+  function onMessage(evt) {
+    let json = JSON.parse(evt.data);
+    let matchSets = json.matchSets.pop();
+    let setScore = matchSets.setScore;
+    document.getElementById('score1').innerText = setScore.team1;
+    document.getElementById('score2').innerText = setScore.team2;
+
+    document.getElementById('set1').innerText = json.setPoints.team1;
+    document.getElementById('set2').innerText = json.setPoints.team2;
+
+    document.getElementById('serve1').innerHTML = json.serving === "team1" ? "&#183;" : "";
+    document.getElementById('serve2').innerHTML = json.serving === "team2" ? "&#183;" : "";
+  }
+
+  function onError(evt) {
+    console.log(evt.data);
+  }
+
+  window.addEventListener("load", init, false);
+
+</script>
+<div class="main">
+	<div class="line">
+		<span class="team" id="team1">Eibelstadt</span>
+		<span class="set" id="set1">0</span>
+		<span class="score" id="score1">0</span>
+		<span class="serve" id="serve1">&#183;</span>
+	</div>
+	<div class="line">
+		<span class="team" id="team2">Jena</span>
+		<span class="set" id="set2">0</span>
+		<span class="score" id="score2">0</span>
+		<span class="serve" id="serve2">&#183;</span>
+	</div>
+</div>
+</body>
+</html>

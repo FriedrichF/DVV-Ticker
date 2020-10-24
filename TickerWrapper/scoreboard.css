@@ -1,0 +1,42 @@
+body {
+	color: white;
+	font-family: Arial;
+}
+
+.main {
+	display: table;
+	background-color: #203185;
+}
+
+.line {
+	display: table-row;
+
+}
+
+span {
+	display: table-cell;
+}
+
+.team {
+	text-align: left;
+	position: relative;
+	padding: 5px;
+}
+
+.serve {
+	font-weight: bolder;
+}
+
+.set {
+	text-align: center;
+	position: relative;
+	background-color: #6d96d4;
+	padding: 5px;
+}
+
+.score {
+	text-align: center;
+	width: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
